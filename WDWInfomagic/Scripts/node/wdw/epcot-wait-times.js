@@ -1,5 +1,5 @@
 // include the Themeparks library
-const Themeparks = require("../node_modules/themeparks");
+const Themeparks = require("themeparks");
 
 // configure where SQLite DB sits
 // optional - will be created in node working directory if not configured
