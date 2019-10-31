@@ -34,5 +34,11 @@ namespace WDWInfomagic.Controllers
             compiler.WaitForExit();
             return json;
         }
+
+        public JsonResult JsonAllowed(object data)
+        {
+            JsonResult d = this.Json(data, JsonRequestBehavior.AllowGet);
+            return d;
+        }
     }
 }

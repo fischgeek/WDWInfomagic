@@ -15,6 +15,6 @@ namespace WDWInfomagic.Controllers
                 return $@"{scriptBase}\epcot-wait-times.js";
             }
         }
-        public ActionResult Index() => new ContentResult { Content = RunNodeScript(scriptPath) };
+        public ActionResult Index() => JsonAllowed(RunNodeScript(scriptPath));
     }
 }

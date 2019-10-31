@@ -15,6 +15,6 @@ namespace WDWInfomagic.Controllers
                 return $@"{scriptBase}\hollywood-studios-wait-times.js";
             }
         }
-        public ActionResult Index() => new ContentResult { Content = RunNodeScript(scriptPath) };
+        public ActionResult Index() => JsonAllowed(RunNodeScript(scriptPath));
     }
 }
