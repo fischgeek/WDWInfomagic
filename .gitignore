@@ -8,6 +8,7 @@
 *.user
 *.userosscache
 *.sln.docstates
+WDWInfomagic/themeparks/wdw/themeparks.db
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
