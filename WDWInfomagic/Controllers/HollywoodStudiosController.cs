@@ -12,7 +12,7 @@ namespace WDWInfomagic.Controllers
         public string scriptPath
         {
             get {
-                return $"{scriptBase}/hollywood-studios-wait-times.js";
+                return $@"{scriptBase}\hollywood-studios-wait-times.js";
             }
         }
         public ActionResult Index() => new ContentResult { Content = RunNodeScript(scriptPath) };

@@ -12,7 +12,7 @@ namespace WDWInfomagic.Controllers
         public string scriptBase
         {
             get {
-                return $@"{Server.MapPath("~/themeparks/wdw")}";
+                return $@"e:\utils\themeparks\wdw";
             }
         }
         private const string node = @"C:\Program Files\nodejs\node.exe";

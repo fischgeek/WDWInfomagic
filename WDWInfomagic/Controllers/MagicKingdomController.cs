@@ -12,9 +12,11 @@ namespace WDWInfomagic.Controllers
         public string scriptPath
         {
             get {
-                return $"{scriptBase}/mk-wait-times.js";
+                return $@"{scriptBase}\magic-kingdom-wait-times.js";
             }
         }
+
         public ActionResult Index() => new ContentResult { Content = RunNodeScript(scriptPath) };
+
     }
 }
