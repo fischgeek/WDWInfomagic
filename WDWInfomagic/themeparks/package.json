@@ -1,5 +1,5 @@
 {
-  "name": "WDWInfomagic",
+  "name": "wdwinfomagic",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "fischgeek",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "themeparks": "^5.1.28"
   }
