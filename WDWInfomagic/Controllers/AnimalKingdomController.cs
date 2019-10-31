@@ -15,6 +15,6 @@ namespace WDWInfomagic.Controllers
                 return $@"{scriptBase}\animal-kingdom-wait-times.js";
             }
         }
-        public ActionResult Index() => JsonAllowed(RunNodeScript(scriptPath));
+        public JsonResult Index() => JsonAllowed(RunNodeScript(scriptPath));
     }
 }

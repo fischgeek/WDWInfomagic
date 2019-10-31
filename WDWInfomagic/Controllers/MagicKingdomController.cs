@@ -16,7 +16,7 @@ namespace WDWInfomagic.Controllers
             }
         }
 
-        public ActionResult Index() => JsonAllowed(RunNodeScript(scriptPath));
+        public JsonResult Index() => JsonAllowed(RunNodeScript(scriptPath));
 
     }
 }
