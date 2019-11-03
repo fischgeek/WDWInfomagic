@@ -46,7 +46,7 @@ namespace WDWInfomagic.Controllers
                 select new RideViewModel {
                     name = ReplaceEntities(r.name)
                     , active = r.active
-                    , location = r.meta.area
+                    , location = ReplaceEntities(r.meta.area)
                     , status = r.status
                     , waitTime = r.waitTime
                     , lastUpdate = r.lastUpdate.AddHours(-4).ToShortTimeString()
