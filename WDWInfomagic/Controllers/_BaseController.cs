@@ -50,6 +50,7 @@ namespace WDWInfomagic.Controllers
                     , status = r.status
                     , waitTime = r.waitTime
                     , lastUpdate = r.lastUpdate.AddHours(-4).ToShortTimeString()
+                    , color = r.active ? r.waitTime < 30 ? "green" : r.waitTime < 60 ? "orange" : "red" : "black"
                 };
             return outRides;
         }

@@ -13,6 +13,8 @@
         list-style: none;
         border-bottom: 1px solid white;
         padding: 5px 10px 5px 10px;
+        /*background-color: #B721FF;*/
+        /*background-image: linear-gradient(19deg, #B721FF 0%, #21D4FD 100%);*/
     }
 
     .ride-container {
@@ -22,7 +24,8 @@
 
     .ride-name {
         margin: 0;
-        margin-right: 70px;
+        margin-right: 85px;
+        font-size: 20px;
     }
 
     .ride-last-update-time {
@@ -32,20 +35,23 @@
 
     .ride-wait-time {
         float: right;
-        font-size: 40px;
-        line-height: 75px;
+        font-size: 33px;
+        line-height: 60px;
         position: absolute;
-        top: 8px;
-        right: 10px;
-        width: 80px;
-        height: 80px;
+        top: 11px;
+        right: 0px;
+        width: 70px;
+        height: 70px;
         text-align: center;
-        border: 2px solid;
+        border: 3px solid;
         border-radius: 50%;
     }
 
     .ride-active {
         background: white;
+        /*background: #8e2de2; /* fallback for old browsers */
+        /*background: -webkit-linear-gradient(to right, #8e2de2, #4a00e0);*/ /* Chrome 10-25, Safari 5.1-6 */
+        /*background: linear-gradient(to right, #8e2de2, #4a00e0);*/
         color: black;
         border: 1px solid;
         border-bottom: none;
@@ -75,27 +81,27 @@
     </div>
 </div>
 @if (Model != null) {
-<div class="row">
-    <div style="width: 100%">
-        <ul>
-            @foreach (var ride in Model) {
-            var clr = (ride.active) ? "ride-active" : "ride-inactive";
-            <li class="@clr">
-                <div class="ride-container">
-                    @*<div class="ride-last-update-time">@ride.lastUpdate</div>*@
-                    <h3 class="ride-name">@ride.name</h3>
-                    <div class="ride-wait-time">@ride.waitTime</div>
-                    <div class="ride-location">@ride.location</div>
-                    @if (ride.active == false) {
-                    <div class="ride-status">@ride.status</div>
-                    }
-                </div>
-            </li>
-    }
-        </ul>
+    <div class="row">
+        <div style="width: 100%">
+            <ul>
+                @foreach (var ride in Model) {
+                    var clr = (ride.active) ? "ride-active" : "ride-inactive";
+                    <li class="@clr">
+                        <div class="ride-container">
+                            @*<div class="ride-last-update-time">@ride.lastUpdate</div>*@
+                            <h3 class="ride-name">@ride.name</h3>
+                            <div class="ride-wait-time" style="border-color: @ride.color;color: @ride.color">@ride.waitTime</div>
+                            <div class="ride-location">@ride.location</div>
+                            @if (ride.active == false) {
+                                <div class="ride-status">@ride.status</div>
+                            }
+                        </div>
+                    </li>
+                }
+            </ul>
+        </div>
+        <div id="last-updated">Last updated: @Model.First().lastUpdate</div>
     </div>
-    <div id="last-updated">Last updated: @Model.First().lastUpdate</div>
-</div>
 }
 
 @section scripts {

@@ -13,5 +13,6 @@ namespace WDWInfomagic.Models
         public bool active { get; set; }
         public decimal waitTime { get; set; }
         public string lastUpdate { get; set; }
+        public string color { get; set; }
     }
 }
