@@ -1,0 +1,102 @@
+﻿@model IEnumerable<WDWInfomagic.Models.RideViewModel>
+
+@{
+    ViewBag.Title = "WaitTimes";
+}
+
+<style>
+    ul {
+        padding: 0;
+    }
+
+    li {
+        list-style: none;
+        border-bottom: 1px solid white;
+        padding: 5px 10px 5px 10px;
+    }
+
+    .ride-container {
+        position: relative;
+        min-height: 95px;
+    }
+
+    .ride-name {
+        margin: 0;
+        margin-right: 70px;
+    }
+
+    .ride-last-update-time {
+        float: right;
+        font-size: 13px;
+    }
+
+    .ride-wait-time {
+        float: right;
+        font-size: 46px;
+        line-height: 1;
+        position: absolute;
+        top: 20px;
+        right: 10px;
+        width: 75px;
+        text-align: center;
+    }
+
+    .ride-active {
+        background: #007bff;
+        color: white;
+    }
+
+    .ride-inactive {
+        background: gray;
+        color: black;
+    }
+    #last-updated {
+        width: 100%;
+        text-align: right;
+        padding-right: 10px;
+    }
+</style>
+<div class="row bottomspace-large">
+    <div class="col-12 text-center">
+        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+            <label class="btn btn-primary">
+                <input type="radio" name="options" id="option1" autocomplete="off" checked> A-Z
+            </label>
+            <label class="btn btn-primary active">
+                <input type="radio" name="options" id="option3" autocomplete="off"> Time
+            </label>
+        </div>
+    </div>
+</div>
+@if (Model != null) {
+<div class="row">
+    <div style="width: 100%">
+        <ul>
+            @foreach (var ride in Model) {
+            var clr = (ride.active) ? "ride-active" : "ride-inactive";
+            <li class="@clr">
+                <div class="ride-container">
+                    @*<div class="ride-last-update-time">@ride.lastUpdate</div>*@
+                    <h3 class="ride-name">@ride.name</h3>
+                    <div class="ride-wait-time">@ride.waitTime</div>
+                    <div class="ride-location">@ride.location</div>
+                    @if (ride.active == false) {
+                    <div class="ride-status">@ride.status</div>
+                    }
+                </div>
+            </li>
+    }
+        </ul>
+    </div>
+    <div id="last-updated">Last updated: @Model.First().lastUpdate</div>
+</div>
+}
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            alert('test')
+            console.log('test')
+        })
+    </script>
+}

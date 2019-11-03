@@ -1,0 +1,19 @@
+﻿<div class="row bottomspace-large">
+    <div class="col-12 text-center">
+        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+            <label class="btn btn-primary" onclick="location.href='/mk/waittimes'">
+                <input type="radio" name="options" id="option1" autocomplete="off"> Magic Kingdom
+            </label>
+            <label class="btn btn-primary active" onclick="location.href='/ak/waittimes'">
+                <input type="radio" name="options" id="option2" autocomplete="off"> Animal Kingdom
+            </label>
+            <label class="btn btn-primary" onclick="location.href='/ep/waittimes'">
+                <input type="radio" name="options" id="option3" autocomplete="off"> Epcot
+            </label>
+            <label class="btn btn-primary" onclick="location.href='/hs/waittimes'">
+                <input type="radio" name="options" id="option4" autocomplete="off"> Hollywood Studios
+            </label>
+        </div>
+    </div>
+</div>
+@{ Html.RenderPartial("~/Views/Shared/_WaitTimes.cshtml"); }
