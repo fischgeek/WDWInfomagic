@@ -9,12 +9,14 @@ namespace WDWInfomagic.Controllers
 {
     public class HollywoodStudiosController : _BaseController
     {
-        public string scriptPath
-        {
-            get {
-                return $@"{scriptBase}\hollywood-studios-wait-times.js";
-            }
-        }
-        public JsonResult Index() => JsonAllowed(RunNodeScript(scriptPath));
+        private const string scriptName = "hollywood-studios-wait-times.js";
+
+        public JsonResult Index() => JsonAllowed(RunNodeScript(scriptName));
+
+        [Route("hs/waittimes")]
+        public ActionResult WaitTimes() => View(GetWaitTimes(scriptName));
+
+        [Route("hs/waittimes/json")]
+        public JsonResult json() => JsonAllowed(RunNodeScript(scriptName));
     }
 }
