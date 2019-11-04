@@ -5,6 +5,12 @@
 }
 
 <style>
+    body {
+        background: #8E2DE2; /* fallback for old browsers */
+        background: -webkit-linear-gradient(to right, #4A00E0, #8E2DE2); /* Chrome 10-25, Safari 5.1-6 */
+        background: linear-gradient(to right, #4A00E0, #8E2DE2); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    }
+
     ul {
         padding: 0;
     }
@@ -53,7 +59,7 @@
         /*background: -webkit-linear-gradient(to right, #8e2de2, #4a00e0);*/ /* Chrome 10-25, Safari 5.1-6 */
         /*background: linear-gradient(to right, #8e2de2, #4a00e0);*/
         color: black;
-        border: 1px solid;
+        border-top: 1px solid #ccc;
         border-bottom: none;
     }
 
@@ -72,10 +78,10 @@
     <div class="col-12 text-center">
         <div class="btn-group btn-group-toggle" data-toggle="buttons">
             <label class="btn btn-primary">
-                <input type="radio" name="options" id="sort-az" autocomplete="off"> A-Z
+                <input type="radio" name="options" id="sort-az" autocomplete="off" readonly="readonly"> A-Z
             </label>
             <label class="btn btn-primary active">
-                <input type="radio" name="options" id="sort-time" autocomplete="off"> Wait
+                <input type="radio" name="options" id="sort-time" autocomplete="off" readonly="readonly"> Wait
             </label>
         </div>
     </div>
@@ -100,15 +106,10 @@
                 }
             </ul>
         </div>
-        <div id="last-updated">Last updated: @Model.First().lastUpdate</div>
+        <div id="last-updated" style="color:white;">Last updated: @Model.First().lastUpdate</div>
     </div>
 }
-
-@section scripts {
-    <script>
-        $(document).ready(function () {
-            alert('test')
-            console.log('test')
-        })
-    </script>
-}
+<script>
+    $(document).ready(function () {
+    })
+</script>
