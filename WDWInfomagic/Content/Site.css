@@ -38,6 +38,8 @@ li {
     list-style: none;
     border-bottom: 1px solid white;
     padding: 5px 10px 5px 10px;
+    /*background-color: #B721FF;*/
+    /*background-image: linear-gradient(19deg, #B721FF 0%, #21D4FD 100%);*/
 }
 
 .ride-container {
@@ -47,7 +49,8 @@ li {
 
 .ride-name {
     margin: 0;
-    margin-right: 70px;
+    margin-right: 85px;
+    font-size: 20px;
 }
 
 .ride-last-update-time {
@@ -57,18 +60,26 @@ li {
 
 .ride-wait-time {
     float: right;
-    font-size: 46px;
-    line-height: 1;
+    font-size: 33px;
+    line-height: 60px;
     position: absolute;
-    top: 20px;
-    right: 10px;
-    width: 75px;
+    top: 11px;
+    right: 0px;
+    width: 70px;
+    height: 70px;
     text-align: center;
+    border: 3px solid;
+    border-radius: 50%;
 }
 
 .ride-active {
-    background: #007bff;
-    color: white;
+    background: white;
+    /*background: #8e2de2; /* fallback for old browsers */
+    /*background: -webkit-linear-gradient(to right, #8e2de2, #4a00e0);*/ /* Chrome 10-25, Safari 5.1-6 */
+    /*background: linear-gradient(to right, #8e2de2, #4a00e0);*/
+    color: black;
+    border-top: 1px solid #ccc;
+    border-bottom: none;
 }
 
 .ride-inactive {
