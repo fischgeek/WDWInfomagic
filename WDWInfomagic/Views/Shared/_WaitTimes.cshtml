@@ -1,8 +1,26 @@
-﻿@model IEnumerable<WDWInfomagic.Models.RideViewModel>
+﻿@model WDWInfomagic.Models.WaitTimesViewModel
 
 @{
     ViewBag.Title = "WaitTimes";
 }
+<div class="row bottomspace-large">
+    <div class="col-12 text-center">
+        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+            <label class="btn btn-primary @Model.MKActive" onclick="location.href='/mk/waittimes'">
+                <input type="radio" name="options" id="option1" autocomplete="off"> Magic Kingdom
+            </label>
+            <label class="btn btn-primary @Model.AKActive" onclick="location.href='/ak/waittimes'">
+                <input type="radio" name="options" id="option2" autocomplete="off"> Animal Kingdom
+            </label>
+            <label class="btn btn-primary @Model.EPActive" onclick="location.href='/ep/waittimes'">
+                <input type="radio" name="options" id="option3" autocomplete="off"> Epcot
+            </label>
+            <label class="btn btn-primary @Model.HSActive" onclick="location.href='/hs/waittimes'">
+                <input type="radio" name="options" id="option4" autocomplete="off"> Hollywood Studios
+            </label>
+        </div>
+    </div>
+</div>
 <div class="row bottomspace-large">
     <div class="col-12 text-center">
         <div class="btn-group btn-group-toggle" data-toggle="buttons">
@@ -16,82 +34,82 @@
     </div>
 </div>
 @if (Model != null) {
-<div class="row">
-    <div style="width: 100%">
-        <ul>
-            @foreach (var ride in Model) {
-            var clr = (ride.active) ? "ride-active" : "ride-inactive";
-            <li class="@clr">
-                <div class="ride-container">
-                    @*<div class="ride-last-update-time">@ride.lastUpdate</div>*@
-                    <h3 class="ride-name">@ride.name</h3>
-                    <div class="ride-wait-time">@ride.waitTime</div>
-                    <div class="ride-location">@ride.location</div>
-                    @if (ride.active == false) {
-                    <div class="ride-status">@ride.status</div>
-                    }
-                </div>
-            </li>
-    }
-        </ul>
+    <div class="row">
+        <div style="width: 100%">
+            <ul>
+                @foreach (var ride in Model.Rides) {
+                    var clr = (ride.active) ? "ride-active" : "ride-inactive";
+                    <li class="@clr">
+                        <div class="ride-container">
+                            @*<div class="ride-last-update-time">@ride.lastUpdate</div>*@
+                            <h3 class="ride-name">@ride.name</h3>
+                            <div class="ride-wait-time" style="border-color: @ride.color;color: @ride.color">@ride.waitTime</div>
+                            <div class="ride-location">@ride.location</div>
+                            @if (ride.active == false) {
+                                <div class="ride-status">@ride.status</div>
+                            }
+                        </div>
+                    </li>
+                }
+            </ul>
+        </div>
+        <div id="last-updated">Last updated: @Model.Rides.First().lastUpdate</div>
     </div>
-    <div id="last-updated">Last updated: @Model.First().lastUpdate</div>
-</div>
 }
 
-    <script>
-        $(document).ready(function () {
-            var sortedAsc = false
-            $('#sort-az').click(function () {
-                if (sortedAsc) {
-                    tinysort('ul > li', { order: 'desc' })
-                } else {
-                    tinysort('ul > li')
-                }
-                sortedAsc = !sortedAsc
-            })
-
-            var sortedTimeAsc = false
-            $('#sort-time').click(function () {
-                if (sortedTimeAsc) {
-                    tinysort('ul > li', { selector: '.ride-wait-time', order: 'desc' })
-                } else {
-                    tinysort('ul > li', { selector: '.ride-wait-time'})
-                }
-                sortedTimeAsc = !sortedTimeAsc
-            })
+<script>
+    $(document).ready(function () {
+        var sortedAsc = false
+        $('#sort-az').click(function () {
+            if (sortedAsc) {
+                tinysort('ul > li', { order: 'desc' })
+            } else {
+                tinysort('ul > li')
+            }
+            sortedAsc = !sortedAsc
         })
 
-        function GetList() {
-            var arr = [];
-            $('.ride-container').each(function () {
-                var name = $(this).find('.ride-name').text()
-                var location = $(this).find('.ride-location').text()
-                var wait = $(this).find('.ride-wait-time').text()
-                var status = $(this).find('.ride-status').text()
-                var obj = {
-                    'name': name,
-                    'location': location,
-                    'wait': wait,
-                    'status': status
-                }
-                arr.push(obj)
-            })
-            return arr
-        }
+        var sortedTimeAsc = false
+        $('#sort-time').click(function () {
+            if (sortedTimeAsc) {
+                tinysort('ul > li', { selector: '.ride-wait-time', order: 'desc' })
+            } else {
+                tinysort('ul > li', { selector: '.ride-wait-time' })
+            }
+            sortedTimeAsc = !sortedTimeAsc
+        })
+    })
 
-        function SortListAscending(arr) {
-            newArray = arr.sort(function (a, b) {
-                return a.name.localeCompare(b.name)
-            })
-            console.log('newarray sorted asc')
-            console.log(newArray)
-        }
-        function SortListDescending(arr) {
-            newArray = arr.sort(function (a, b) {
-                return b.name.localeCompare(a.name)
-            })
-            console.log('newarray sorted desc')
-            console.log(newArray)
-        }
-    </script>
+    function GetList() {
+        var arr = [];
+        $('.ride-container').each(function () {
+            var name = $(this).find('.ride-name').text()
+            var location = $(this).find('.ride-location').text()
+            var wait = $(this).find('.ride-wait-time').text()
+            var status = $(this).find('.ride-status').text()
+            var obj = {
+                'name': name,
+                'location': location,
+                'wait': wait,
+                'status': status
+            }
+            arr.push(obj)
+        })
+        return arr
+    }
+
+    function SortListAscending(arr) {
+        newArray = arr.sort(function (a, b) {
+            return a.name.localeCompare(b.name)
+        })
+        console.log('newarray sorted asc')
+        console.log(newArray)
+    }
+    function SortListDescending(arr) {
+        newArray = arr.sort(function (a, b) {
+            return b.name.localeCompare(a.name)
+        })
+        console.log('newarray sorted desc')
+        console.log(newArray)
+    }
+</script>

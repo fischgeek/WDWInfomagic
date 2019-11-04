@@ -32,7 +32,7 @@ namespace WDWInfomagic.Controllers
             return json;
         }
 
-        public IEnumerable<RideViewModel> GetWaitTimes(string scriptName)   
+        public WaitTimesViewModel GetWaitTimes(string scriptName, Park park)
         {
             var rawTimes = RunNodeScript(scriptName);
             if (string.IsNullOrEmpty(rawTimes)) {
@@ -52,7 +52,14 @@ namespace WDWInfomagic.Controllers
                     , lastUpdate = r.lastUpdate.AddHours(-4).ToShortTimeString()
                     , color = r.active ? r.waitTime < 30 ? "green" : r.waitTime < 60 ? "orange" : "red" : "black"
                 };
-            return outRides;
+            WaitTimesViewModel waitTimesViewModel = new WaitTimesViewModel() {
+                Rides = outRides
+                , MKActive = park == Park.MagicKingdom ? "active" : ""
+                , AKActive = park == Park.AnimalKingdom ? "active" : ""
+                , EPActive = park == Park.Epcot ? "active" : ""
+                , HSActive = park == Park.HollywoodStudios ? "active" : ""
+            };
+            return waitTimesViewModel;
         }
 
         public JsonResult JsonAllowed(object data)
@@ -72,5 +79,13 @@ namespace WDWInfomagic.Controllers
                 .Replace("â€™", "'")
                 .Replace("â„¢", "");
         }
+    }
+
+    public enum Park
+    {
+        MagicKingdom
+        , AnimalKingdom
+        , Epcot
+        , HollywoodStudios
     }
 }

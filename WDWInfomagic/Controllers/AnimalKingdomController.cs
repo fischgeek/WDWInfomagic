@@ -14,7 +14,7 @@ namespace WDWInfomagic.Controllers
         public JsonResult Index() => JsonAllowed(RunNodeScript(scriptName));
 
         [Route("ak/waittimes")]
-        public ActionResult WaitTimes() => View(GetWaitTimes(scriptName));
+        public ActionResult WaitTimes() => View(GetWaitTimes(scriptName, Park.AnimalKingdom));
 
         [Route("ak/waittimes/json")]
         public JsonResult json() => JsonAllowed(RunNodeScript(scriptName));

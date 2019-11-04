@@ -131,6 +131,7 @@
     </Compile>
     <Compile Include="Models\Ride.cs" />
     <Compile Include="Models\RideViewModel.cs" />
+    <Compile Include="Models\WaitTimesViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
