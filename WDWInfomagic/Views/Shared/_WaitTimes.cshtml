@@ -3,67 +3,14 @@
 @{
     ViewBag.Title = "WaitTimes";
 }
-
-<style>
-    ul {
-        padding: 0;
-    }
-
-    li {
-        list-style: none;
-        border-bottom: 1px solid white;
-        padding: 5px 10px 5px 10px;
-    }
-
-    .ride-container {
-        position: relative;
-        min-height: 95px;
-    }
-
-    .ride-name {
-        margin: 0;
-        margin-right: 70px;
-    }
-
-    .ride-last-update-time {
-        float: right;
-        font-size: 13px;
-    }
-
-    .ride-wait-time {
-        float: right;
-        font-size: 46px;
-        line-height: 1;
-        position: absolute;
-        top: 20px;
-        right: 10px;
-        width: 75px;
-        text-align: center;
-    }
-
-    .ride-active {
-        background: #007bff;
-        color: white;
-    }
-
-    .ride-inactive {
-        background: gray;
-        color: black;
-    }
-    #last-updated {
-        width: 100%;
-        text-align: right;
-        padding-right: 10px;
-    }
-</style>
 <div class="row bottomspace-large">
     <div class="col-12 text-center">
         <div class="btn-group btn-group-toggle" data-toggle="buttons">
-            <label class="btn btn-primary">
-                <input type="radio" name="options" id="sort-az" autocomplete="off"> A-Z
+            <label id="sort-az" class="btn btn-primary">
+                <input type="radio" name="options" autocomplete="off"> A-Z
             </label>
-            <label class="btn btn-primary active">
-                <input type="radio" name="options" id="sort-time" autocomplete="off"> Wait
+            <label id="sort-time" class="btn btn-primary active">
+                <input type="radio" name="options" autocomplete="off"> Wait
             </label>
         </div>
     </div>
@@ -92,11 +39,59 @@
 </div>
 }
 
-@section scripts {
     <script>
         $(document).ready(function () {
-            alert('test')
-            console.log('test')
+            var sortedAsc = false
+            $('#sort-az').click(function () {
+                if (sortedAsc) {
+                    tinysort('ul > li', { order: 'desc' })
+                } else {
+                    tinysort('ul > li')
+                }
+                sortedAsc = !sortedAsc
+            })
+
+            var sortedTimeAsc = false
+            $('#sort-time').click(function () {
+                if (sortedTimeAsc) {
+                    tinysort('ul > li', { selector: '.ride-wait-time', order: 'desc' })
+                } else {
+                    tinysort('ul > li', { selector: '.ride-wait-time'})
+                }
+                sortedTimeAsc = !sortedTimeAsc
+            })
         })
+
+        function GetList() {
+            var arr = [];
+            $('.ride-container').each(function () {
+                var name = $(this).find('.ride-name').text()
+                var location = $(this).find('.ride-location').text()
+                var wait = $(this).find('.ride-wait-time').text()
+                var status = $(this).find('.ride-status').text()
+                var obj = {
+                    'name': name,
+                    'location': location,
+                    'wait': wait,
+                    'status': status
+                }
+                arr.push(obj)
+            })
+            return arr
+        }
+
+        function SortListAscending(arr) {
+            newArray = arr.sort(function (a, b) {
+                return a.name.localeCompare(b.name)
+            })
+            console.log('newarray sorted asc')
+            console.log(newArray)
+        }
+        function SortListDescending(arr) {
+            newArray = arr.sort(function (a, b) {
+                return b.name.localeCompare(a.name)
+            })
+            console.log('newarray sorted desc')
+            console.log(newArray)
+        }
     </script>
-}

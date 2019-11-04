@@ -26,3 +26,55 @@ textarea {
 .bottomspace-large {
     margin-bottom: 20px;
 }
+
+ul {
+    padding: 0;
+}
+
+li {
+    list-style: none;
+    border-bottom: 1px solid white;
+    padding: 5px 10px 5px 10px;
+}
+
+.ride-container {
+    position: relative;
+    min-height: 95px;
+}
+
+.ride-name {
+    margin: 0;
+    margin-right: 70px;
+}
+
+.ride-last-update-time {
+    float: right;
+    font-size: 13px;
+}
+
+.ride-wait-time {
+    float: right;
+    font-size: 46px;
+    line-height: 1;
+    position: absolute;
+    top: 20px;
+    right: 10px;
+    width: 75px;
+    text-align: center;
+}
+
+.ride-active {
+    background: #007bff;
+    color: white;
+}
+
+.ride-inactive {
+    background: gray;
+    color: black;
+}
+
+#last-updated {
+    width: 100%;
+    text-align: right;
+    padding-right: 10px;
+}
