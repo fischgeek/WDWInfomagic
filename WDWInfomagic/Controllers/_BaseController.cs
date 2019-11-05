@@ -54,10 +54,11 @@ namespace WDWInfomagic.Controllers
                 };
             WaitTimesViewModel waitTimesViewModel = new WaitTimesViewModel() {
                 Rides = outRides
-                , MKActive = park == Park.MagicKingdom ? "active" : ""
-                , AKActive = park == Park.AnimalKingdom ? "active" : ""
-                , EPActive = park == Park.Epcot ? "active" : ""
-                , HSActive = park == Park.HollywoodStudios ? "active" : ""
+                , ParkName = park.ToString()
+                , MKActive = park == Park.MagicKingdom ? "active-park" : ""
+                , AKActive = park == Park.AnimalKingdom ? "active-park" : ""
+                , EPActive = park == Park.Epcot ? "active-park" : ""
+                , HSActive = park == Park.HollywoodStudios ? "active-park" : ""
             };
             return waitTimesViewModel;
         }

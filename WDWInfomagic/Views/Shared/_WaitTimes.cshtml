@@ -1,11 +1,21 @@
 ﻿@model WDWInfomagic.Models.WaitTimesViewModel
-
 @{
-    ViewBag.Title = "WaitTimes";
+    ViewBag.Title = Model.ParkName;
 }
-<div class="row bottomspace-large">
-    <div class="col-12 text-center">
-        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+<div id="header" class="row bottomspace-large">
+    <div class="col text-center">
+        <img src="~/Images/mk.png" class="img-fluid park-img @Model.MKActive" onclick="location.href='/mk/waittimes'"/>
+    </div>
+    <div class="col text-center">
+        <img src="~/Images/epcot.png" class="img-fluid park-img @Model.EPActive" onclick="location.href='/ep/waittimes'"/>
+    </div>
+    <div class="col text-center">
+        <img src="~/Images/hs.png" class="img-fluid park-img @Model.HSActive" onclick="location.href='/hs/waittimes'"/>
+    </div>
+    <div class="col text-center">
+        <img src="~/Images/ak.png" class="img-fluid park-img @Model.AKActive" onclick="location.href='/ak/waittimes'"/>
+    </div>
+    @*<div class="btn-group btn-group-toggle" data-toggle="buttons">
             <label class="btn btn-primary @Model.MKActive" onclick="location.href='/mk/waittimes'">
                 <input type="radio" name="options" id="option1" autocomplete="off"> Magic Kingdom
             </label>
@@ -18,8 +28,8 @@
             <label class="btn btn-primary @Model.HSActive" onclick="location.href='/hs/waittimes'">
                 <input type="radio" name="options" id="option4" autocomplete="off"> Hollywood Studios
             </label>
-        </div>
-    </div>
+        </div>*@
+    @*</div>*@
 </div>
 <div class="row bottomspace-large">
     <div class="col-12 text-center">
@@ -59,6 +69,7 @@
 
 <script>
     $(document).ready(function () {
+        document.title = '@ViewBag.Title'
         var sortedAsc = false
         $('#sort-az').click(function () {
             if (sortedAsc) {

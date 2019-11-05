@@ -1,9 +1,9 @@
 ﻿body {
-    padding-top: 50px;
+    padding-top: 10px;
     padding-bottom: 20px;
-    /*background: #8E2DE2;
+    background: #8E2DE2;
     background: -webkit-linear-gradient(to right, #4A00E0, #8E2DE2);
-    background: linear-gradient(to right, #4A00E0, #8E2DE2);*/
+    background: linear-gradient(to right, #4A00E0, #8E2DE2);
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -91,4 +91,20 @@ li {
     width: 100%;
     text-align: right;
     padding-right: 10px;
+}
+
+#header, #header .col, #header .col img {
+    max-height: 100px;
+}
+
+.park-img {
+    padding: 5px;
+}
+
+.park-img:hover {
+    cursor: pointer;
+}
+
+.active-park {
+    border-bottom: 4px dotted white;
 }
