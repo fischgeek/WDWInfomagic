@@ -11,30 +11,20 @@ namespace WDWInfomagic.Controllers
 {
     public class _BaseController : Controller
     {
-        private const string scriptBase = @"e:\utils\themeparks\wdw";
-        private const string node = @"C:\Program Files\nodejs\node.exe";
-        private const string workingDir = @"C:\Program Files\nodejs\";
-
-        public string RunNodeScript(string script)
+        private const string dataDir = @"e:\utils\themeparks\wdw\json";
+        public string GetCachedWaitTimes(string parkInitials)
         {
-            if (!System.IO.File.Exists(node)) {
-                return "Node not found on server. Looking in C:\\Program Files\\nodejs\\node.exe";
+            var dataFile = $"{dataDir}\\{parkInitials}.json";
+            if (!System.IO.File.Exists(dataFile)) {
+                return $"Data file not found for {parkInitials}";
             }
-            Process compiler = new Process();
-            compiler.StartInfo.FileName = node;
-            compiler.StartInfo.Arguments = $@"{scriptBase}\{script}";
-            compiler.StartInfo.UseShellExecute = false;
-            compiler.StartInfo.RedirectStandardOutput = true;
-            compiler.StartInfo.WorkingDirectory = workingDir;
-            compiler.Start();
-            var json = compiler.StandardOutput.ReadToEnd();
-            compiler.WaitForExit();
+            var json = System.IO.File.ReadAllText(dataFile);
             return json;
         }
 
-        public WaitTimesViewModel GetWaitTimes(string scriptName, Park park)
+        public WaitTimesViewModel GetWaitTimes(string parkInitials, Park park)
         {
-            var rawTimes = RunNodeScript(scriptName);
+            var rawTimes = GetCachedWaitTimes(parkInitials);
             if (string.IsNullOrEmpty(rawTimes)) {
                 return null;
             }
@@ -77,6 +67,9 @@ namespace WDWInfomagic.Controllers
             return str
                 .Replace("\"it's a small world\"", "It's a Small World")
                 .Replace("â€“", "-")
+                .Replace("ΓÇô", "-")
+                .Replace("Γäó", "")
+                .Replace("ΓÇÖ", "'")
                 .Replace("â€™", "'")
                 .Replace("â„¢", "");
         }

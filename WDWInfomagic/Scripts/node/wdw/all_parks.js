@@ -1,5 +1,6 @@
 // include the Themeparks library
 const Themeparks = require("themeparks");
+const fs = require("fs");
 
 // configure where SQLite DB sits
 // optional - will be created in node working directory if not configured
@@ -12,6 +13,7 @@ const mk = new Themeparks.Parks.WaltDisneyWorldMagicKingdom();
 const ak = new Themeparks.Parks.WaltDisneyWorldAnimalKingdom();
 const ep = new Themeparks.Parks.WaltDisneyWorldEpcot();
 const hs = new Themeparks.Parks.WaltDisneyWorldHollywoodStudios();
+const refreshInverval = 1
 
 GetStamp = (park) => {
     var d = new Date()
@@ -27,46 +29,69 @@ GetStamp = (park) => {
     var stamp = `${y}-${m}-${da}_${hr}:${mn}:${s}`
     console.log(`[${stamp}] ${park}`)
 }
+WriteData = (park, data) => {
+    let f = `json\\${park}.json`
+    if (fs.existsSync(f)) {
+        fs.unlinkSync(f, (unlinkErr) => {
+            if (unlinkErr) {
+                console.log('ERROR DELETING FILE')
+                console.log(unlinkErr)
+            }
+            console.log("File deleted.")
+        })
+    }
+    fs.writeFile(f, data, (err) => {
+        if (err) {
+            console.log("ERROR WRITING TO FILE")
+            console.log(err)
+        }
+        console.log(`${f} wait times saved to file.`)
+    })
+}
 
 // Access wait times by Promise
 const CheckMKWaitTimes = () => {
     GetStamp('MAGIC_KINGDOM_START')
     mk.GetWaitTimes().then((rideTimes) => {
+        WriteData('mk', JSON.stringify(rideTimes))
     }).catch((error) => {
         console.error(error);
     }).then(() => {
         GetStamp('MAGIC_KINGDOM_END')
-        setTimeout(CheckMKWaitTimes, 1000 * 60 * 5); // refresh every 5 minutes
+        setTimeout(CheckMKWaitTimes, 1000 * 60 * refreshInverval); // refresh every 5 minutes
     });
 };
 const CheckAKWaitTimes = () => {
     GetStamp('ANIMAL_KINGDOM_START')
     ak.GetWaitTimes().then((rideTimes) => {
+        WriteData('ak', JSON.stringify(rideTimes))
     }).catch((error) => {
         console.error(error);
     }).then(() => {
         GetStamp('ANIMAL_KINGDOM_END')
-        setTimeout(CheckAKWaitTimes, 1000 * 60 * 5); // refresh every 5 minutes
+        setTimeout(CheckAKWaitTimes, 1000 * 60 * refreshInverval); // refresh every 5 minutes
     });
 };
 const CheckHSWaitTimes = () => {
     GetStamp('HOLLYWOOD_STUDIOS_START')
     hs.GetWaitTimes().then((rideTimes) => {
+        WriteData('hs', JSON.stringify(rideTimes))
     }).catch((error) => {
         console.error(error);
     }).then(() => {
         GetStamp('HOLLYWOOD_STUDIOS_END')
-        setTimeout(CheckHSWaitTimes, 1000 * 60 * 5); // refresh every 5 minutes
+        setTimeout(CheckHSWaitTimes, 1000 * 60 * refreshInverval); // refresh every 5 minutes
     });
 };
 const CheckEPWaitTimes = () => {
     GetStamp('EPCOT_START')
     ep.GetWaitTimes().then((rideTimes) => {
+        WriteData('ep', JSON.stringify(rideTimes))
     }).catch((error) => {
         console.error(error);
     }).then(() => {
         GetStamp('EPCOT_END')
-        setTimeout(CheckEPWaitTimes, 1000 * 60 * 5); // refresh every 5 minutes
+        setTimeout(CheckEPWaitTimes, 1000 * 60 * refreshInverval); // refresh every 5 minutes
     });
 };
 CheckMKWaitTimes();

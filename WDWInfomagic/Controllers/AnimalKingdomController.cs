@@ -9,14 +9,14 @@ namespace WDWInfomagic.Controllers
 {
     public class AnimalKingdomController : _BaseController
     {
-        private const string scriptName = "animal-kingdom-wait-times.js";
+        private const string parkInitials = "ak";
 
-        public JsonResult Index() => JsonAllowed(RunNodeScript(scriptName));
+        public JsonResult Index() => JsonAllowed(GetCachedWaitTimes(parkInitials));
 
         [Route("ak/waittimes")]
-        public ActionResult WaitTimes() => View(GetWaitTimes(scriptName, Park.AnimalKingdom));
+        public ActionResult WaitTimes() => View(GetWaitTimes(parkInitials, Park.AnimalKingdom));
 
         [Route("ak/waittimes/json")]
-        public JsonResult json() => JsonAllowed(RunNodeScript(scriptName));
+        public JsonResult json() => JsonAllowed(GetCachedWaitTimes(parkInitials));
     }
 }
