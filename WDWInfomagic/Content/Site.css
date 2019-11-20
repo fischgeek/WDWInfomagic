@@ -91,6 +91,7 @@ li {
     width: 100%;
     text-align: right;
     padding-right: 10px;
+    color: white;
 }
 
 #header, #header .col, #header .col img {
