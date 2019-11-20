@@ -11,15 +11,15 @@ namespace WDWInfomagic.Controllers
 {
     public class MagicKingdomController : _BaseController
     {
-        private const string scriptName = "magic-kingdom-wait-times.js";
+        private const string parkInitials = "mk";
 
-        public JsonResult Index() => JsonAllowed(RunNodeScript(scriptName));
+        public JsonResult Index() => JsonAllowed(GetCachedWaitTimes(parkInitials));
 
         [Route("mk/waittimes")]
-        public ActionResult WaitTimes() => View(GetWaitTimes(scriptName, Park.MagicKingdom));
+        public ActionResult WaitTimes() => View(GetWaitTimes(parkInitials, Park.MagicKingdom));
 
         [Route("mk/waittimes/json")]
-        public JsonResult json() => JsonAllowed(RunNodeScript(scriptName));
+        public JsonResult json() => JsonAllowed(GetCachedWaitTimes(parkInitials));
 
     }
 }

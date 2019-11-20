@@ -9,14 +9,14 @@ namespace WDWInfomagic.Controllers
 {
     public class EpcotController : _BaseController
     {
-        private const string scriptName = "epcot-wait-times.js";
+        private const string parkInitials = "ep";
 
-        public JsonResult Index() => JsonAllowed(RunNodeScript(scriptName));
+        public JsonResult Index() => JsonAllowed(GetCachedWaitTimes(parkInitials));
 
         [Route("ep/waittimes")]
-        public ActionResult WaitTimes() => View(GetWaitTimes(scriptName, Park.Epcot));
+        public ActionResult WaitTimes() => View(GetWaitTimes(parkInitials, Park.Epcot));
 
         [Route("ep/waittimes/json")]
-        public JsonResult json() => JsonAllowed(RunNodeScript(scriptName));
+        public JsonResult json() => JsonAllowed(GetCachedWaitTimes(parkInitials));
     }
 }
