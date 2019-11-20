@@ -49,7 +49,7 @@ namespace WDWInfomagic.Controllers
                     , location = ReplaceEntities(r.meta.area)
                     , status = r.status
                     , waitTime = r.waitTime
-                    , lastUpdate = r.lastUpdate.AddHours(-4).ToShortTimeString()
+                    , lastUpdate = r.lastUpdate.ToLocalTime().AddHours(1).ToShortTimeString()
                     , color = r.active ? r.waitTime < 30 ? "green" : r.waitTime < 60 ? "orange" : "red" : "black"
                 };
             WaitTimesViewModel waitTimesViewModel = new WaitTimesViewModel() {
