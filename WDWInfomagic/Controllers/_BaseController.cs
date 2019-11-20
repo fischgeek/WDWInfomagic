@@ -68,6 +68,9 @@ namespace WDWInfomagic.Controllers
             return str
                 .Replace("\"it's a small world\"", "It's a Small World")
                 .Replace("â€“", "-")
+                .Replace("ΓÇô", "-")
+                .Replace("Γäó", "")
+                .Replace("ΓÇÖ", "'")
                 .Replace("â€™", "'")
                 .Replace("â„¢", "");
         }
