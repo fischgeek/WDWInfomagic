@@ -13,10 +13,11 @@ const park = new Themeparks.Parks.WaltDisneyWorldAnimalKingdom();
 // Access wait times by Promise
 const CheckWaitTimes = () => {
     park.GetWaitTimes().then((rideTimes) => {
-        rideTimes.forEach((ride) => {
-            console.log(JSON.stringify(ride))
+        console.log(JSON.stringify(rideTimes));
+        //rideTimes.forEach((ride) => {
+            //console.log(JSON.stringify(ride))
             //console.log(`${ride.name}: ${ride.waitTime} minutes wait (${ride.status})`);
-        });
+        //});
     }).catch((error) => {
         console.error(error);
     }).then(() => {
