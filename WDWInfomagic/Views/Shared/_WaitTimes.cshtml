@@ -4,36 +4,32 @@
 }
 <div id="header" class="row bottomspace-large">
     <div class="col text-center">
-        <img src="~/Images/mk.png" class="img-fluid park-img @Model.MKActive" onclick="location.href='/mk/waittimes'"/>
+        <img src="~/Images/mk.png" class="img-fluid park-img @Model.MKActive" onclick="location.href='/mk/waittimes'" />
     </div>
     <div class="col text-center">
-        <img src="~/Images/epcot.png" class="img-fluid park-img @Model.EPActive" onclick="location.href='/ep/waittimes'"/>
+        <img src="~/Images/epcot.png" class="img-fluid park-img @Model.EPActive" onclick="location.href='/ep/waittimes'" />
     </div>
     <div class="col text-center">
-        <img src="~/Images/hs.png" class="img-fluid park-img @Model.HSActive" onclick="location.href='/hs/waittimes'"/>
+        <img src="~/Images/hs.png" class="img-fluid park-img @Model.HSActive" onclick="location.href='/hs/waittimes'" />
     </div>
     <div class="col text-center">
-        <img src="~/Images/ak.png" class="img-fluid park-img @Model.AKActive" onclick="location.href='/ak/waittimes'"/>
+        <img src="~/Images/ak.png" class="img-fluid park-img @Model.AKActive" onclick="location.href='/ak/waittimes'" />
     </div>
 </div>
 <div class="row bottomspace-large">
     <div class="col-12 text-center">
-        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+        <div class="btn-group btn-group-toggle">
             <label id="sort-az" class="btn btn-primary">
-                <input type="radio" name="options" autocomplete="off"> A-Z
+                <input type="radio" name="options" autocomplete="off"><i class="la la-sort-alpha-down"></i>
             </label>
-            <label id="sort-time" class="btn btn-primary active">
-                <input type="radio" name="options" autocomplete="off"> Wait
+            <label id="sort-location" class="btn btn-primary">
+                <input type="radio" name="options" autocomplete="off"><i class="la la-map-marker"></i>
             </label>
+            <label id="sort-time" class="btn btn-primary">
+                <input type="radio" name="options" autocomplete="off"><i class="la la-clock"></i>
+            </label>
+            <button id="toggleClosed" type="button" class="btn btn-primary d-flex float-right" data-toggle="button"><i class="la la-ban"></i></button>
         </div>
-        @*<div class="btn-group btn-group-toggle" data-toggle="buttons">
-            <label id="sort-az" class="btn btn-primary">
-                <input type="radio" name="options" autocomplete="off"> A-Z
-            </label>
-            <label id="sort-time" class="btn btn-primary active">
-                <input type="radio" name="options" autocomplete="off"> Wait
-            </label>
-        </div>*@
     </div>
 </div>
 @if (Model != null) {
@@ -63,18 +59,23 @@
 <script>
     $(document).ready(function () {
         document.title = 'Disney Wait Times'
+        $('ul > li.ride-inactive').hide();
         var sortedAsc = false
-        $('#sort-az').click(function () {
+        $('#sort-az').bind('touchstart', function () {
             if (sortedAsc) {
                 tinysort('ul > li', { order: 'desc' })
+                $(this).find('i.la').addClass('la-sort-alpha-down-alt')
+                $(this).find('i.la').removeClass('la-sort-down')
             } else {
                 tinysort('ul > li')
+                $(this).find('i.la').removeClass('la-sort-alpha-down-alt')
+                $(this).find('i.la').addClass('la-sort-alpha-down')                
             }
             sortedAsc = !sortedAsc
         })
 
         var sortedTimeAsc = false
-        $('#sort-time').click(function () {
+        $('#sort-time').bind('touchstart', function () {
             if (sortedTimeAsc) {
                 tinysort('ul > li', { selector: '.ride-wait-time', order: 'desc' })
             } else {
@@ -82,38 +83,25 @@
             }
             sortedTimeAsc = !sortedTimeAsc
         })
-    })
 
-    function GetList() {
-        var arr = [];
-        $('.ride-container').each(function () {
-            var name = $(this).find('.ride-name').text()
-            var location = $(this).find('.ride-location').text()
-            var wait = $(this).find('.ride-wait-time').text()
-            var status = $(this).find('.ride-status').text()
-            var obj = {
-                'name': name,
-                'location': location,
-                'wait': wait,
-                'status': status
+        var sortedLocationAsc = false
+        $('#sort-location').bind('touchstart', function () {
+            if (sortedLocationAsc) {
+                tinysort('ul > li', { selector: '.ride-location', order: 'desc' })
+            } else {
+                tinysort('ul > li', { selector: '.ride-location' })
             }
-            arr.push(obj)
+            sortedLocationAsc = !sortedLocationAsc
         })
-        return arr
-    }
 
-    function SortListAscending(arr) {
-        newArray = arr.sort(function (a, b) {
-            return a.name.localeCompare(b.name)
+        var showClosed = true
+        $('#toggleClosed').bind('touchstart', function () {
+            if (showClosed) {
+                $('ul > li.ride-inactive').show();
+            } else {
+                $('ul > li.ride-inactive').hide();
+            }
+            showClosed = !showClosed
         })
-        console.log('newarray sorted asc')
-        console.log(newArray)
-    }
-    function SortListDescending(arr) {
-        newArray = arr.sort(function (a, b) {
-            return b.name.localeCompare(a.name)
-        })
-        console.log('newarray sorted desc')
-        console.log(newArray)
-    }
+    })
 </script>

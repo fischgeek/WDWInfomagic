@@ -109,3 +109,7 @@ li {
 .active-park {
     border-bottom: 4px dotted white;
 }
+
+.la,.lar,.lab {
+    font-size: 24px;
+}
