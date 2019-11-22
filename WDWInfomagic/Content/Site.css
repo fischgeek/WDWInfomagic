@@ -113,3 +113,9 @@ li {
 .la,.lar,.lab {
     font-size: 24px;
 }
+
+.park-hours {
+    font-family: 'aladin', cursive;
+    font-size: 20px;
+    color: white;
+}
