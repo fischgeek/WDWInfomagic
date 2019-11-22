@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - WDWInfomagic</title>
     <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.1.0/css/line-awesome.min.css">
-
+    <link href="https://fonts.googleapis.com/css?family=Aladin|Kalam&display=swap" rel="stylesheet">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-title" content="InfoMagic">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -23,5 +23,16 @@
         @RenderBody()
     </div>
     @RenderSection("scripts", required: false)
+    <script>
+        jQuery.event.special.touchstart = {
+            setup: function (_, ns, handle) {
+                if (ns.includes("noPreventDefault")) {
+                    this.addEventListener("touchstart", handle, { passive: false })
+                } else {
+                    this.addEventListener("touchstart", handle, { passive: true })
+                }
+            }
+        }
+    </script>
 </body>
 </html>
