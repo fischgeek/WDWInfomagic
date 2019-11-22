@@ -22,13 +22,25 @@ namespace WDWInfomagic.Controllers
             return json;
         }
 
+        public string GetCachedOpeningTimes(string parkInitials)
+        {
+            var dataFile = $"{dataDir}\\{parkInitials}_hours.json";
+            if (!System.IO.File.Exists(dataFile)) {
+                return $"Hours file not found for {parkInitials}";
+            }
+            var json = System.IO.File.ReadAllText(dataFile);
+            return json;
+        }
+
         public WaitTimesViewModel GetWaitTimes(string parkInitials, Park park)
         {
             var rawTimes = GetCachedWaitTimes(parkInitials);
+            var rawHours = GetCachedOpeningTimes(parkInitials);
             if (string.IsNullOrEmpty(rawTimes)) {
                 return null;
             }
             List<Ride> rides = JsonConvert.DeserializeObject<List<Ride>>(rawTimes);
+            List<OpeningTime> times = JsonConvert.DeserializeObject<List<OpeningTime>>(rawHours);
             var outRides =
                 from r in rides
                 orderby r.waitTime
@@ -42,9 +54,16 @@ namespace WDWInfomagic.Controllers
                     , lastUpdate = r.lastUpdate.ToLocalTime().AddHours(1).ToShortTimeString()
                     , color = r.active ? r.waitTime < 30 ? "green" : r.waitTime < 60 ? "orange" : "red" : "black"
                 };
+            var xx = times.Where(x => x.date == DateTime.Now.Date).ToList();
+            var time = new OpeningTime();
+            if (xx.Count > 0) {
+                time = xx.First();
+            }
+
             WaitTimesViewModel waitTimesViewModel = new WaitTimesViewModel() {
                 Rides = outRides
                 , ParkName = park.ToString()
+                , ParkHours = $"{time.openingTime.ToShortTimeString()} - {time.closingTime.ToShortTimeString()}"
                 , MKActive = park == Park.MagicKingdom ? "active-park" : ""
                 , AKActive = park == Park.AnimalKingdom ? "active-park" : ""
                 , EPActive = park == Park.Epcot ? "active-park" : ""

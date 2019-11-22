@@ -8,6 +8,7 @@ namespace WDWInfomagic.Models
     public class WaitTimesViewModel
     {
         public string ParkName { get; set; }
+        public string ParkHours { get; set; }
         public IEnumerable<RideViewModel> Rides { get; set; }
         public string MKActive { get; set; }
         public string AKActive { get; set; }
