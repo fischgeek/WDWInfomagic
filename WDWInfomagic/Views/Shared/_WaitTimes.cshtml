@@ -2,64 +2,70 @@
 @{
     ViewBag.Title = Model.ParkName;
 }
-<div id="header" class="row bottomspace-large">
-    <div class="col text-center">
-        <img src="~/Images/mk.png" class="img-fluid park-img @Model.MKActive" onclick="location.href='/mk/waittimes'" />
-    </div>
-    <div class="col text-center">
-        <img src="~/Images/epcot.png" class="img-fluid park-img @Model.EPActive" onclick="location.href='/ep/waittimes'" />
-    </div>
-    <div class="col text-center">
-        <img src="~/Images/hs.png" class="img-fluid park-img @Model.HSActive" onclick="location.href='/hs/waittimes'" />
-    </div>
-    <div class="col text-center">
-        <img src="~/Images/ak.png" class="img-fluid park-img @Model.AKActive" onclick="location.href='/ak/waittimes'" />
-    </div>
-</div>
-<div class="row">
-    <div class="col-12 text-center bottomspace-large">
-        <div class="park-hours">@Model.ParkHours</div>
-    </div>
-</div>
-<div class="row bottomspace-large">
-    <div class="col-12 text-center">
-        <div class="btn-group btn-group-toggle">
-            <label id="sort-az" class="btn btn-primary">
-                <input type="radio" name="options" autocomplete="off"><i class="la la-sort-alpha-down"></i>
-            </label>
-            <label id="sort-location" class="btn btn-primary">
-                <input type="radio" name="options" autocomplete="off"><i class="la la-map-marker"></i>
-            </label>
-            <label id="sort-time" class="btn btn-primary">
-                <input type="radio" name="options" autocomplete="off"><i class="la la-clock"></i>
-            </label>
-            <button id="toggleClosed" type="button" class="btn btn-primary d-flex float-right" data-toggle="button"><i class="la la-ban"></i></button>
+<div id="header-container" class="@Model.ParkBackgroundClass"></div>
+<div id="overlay"></div>
+<div id="header-controls-container">
+    <div id="header-icons-container" class="row bottomspace-large">
+        <div class="col text-center">
+            <img src="~/Images/mk.png" class="img-fluid park-img @Model.MKActive" onclick="location.href='/mk/waittimes'" />
+        </div>
+        <div class="col text-center">
+            <img src="~/Images/epcot.png" class="img-fluid park-img @Model.EPActive" onclick="location.href='/ep/waittimes'" />
+        </div>
+        <div class="col text-center">
+            <img src="~/Images/hs.png" class="img-fluid park-img @Model.HSActive" onclick="location.href='/hs/waittimes'" />
+        </div>
+        <div class="col text-center">
+            <img src="~/Images/ak.png" class="img-fluid park-img @Model.AKActive" onclick="location.href='/ak/waittimes'" />
         </div>
     </div>
-</div>
-@if (Model != null) {
     <div class="row">
-        <div style="width: 100%">
-            <ul>
-                @foreach (var ride in Model.Rides) {
-                    var clr = (ride.active) ? "ride-active" : "ride-inactive";
-                    <li class="@clr">
-                        <div class="ride-container">
-                            @*<div class="ride-last-update-time">@ride.lastUpdate</div>*@
-                            <h3 class="ride-name">@ride.name</h3>
-                            <div class="ride-wait-time" style="border-color: @ride.color;color: @ride.color">@ride.waitTime</div>
-                            <div class="ride-location">@ride.location</div>
-                            @if (ride.active == false) {
-                                <div class="ride-status">@ride.status</div>
-                            }
-                        </div>
-                    </li>
-                }
-            </ul>
+        <div class="col-12 text-center bottomspace-large">
+            <div class="park-hours">@Model.ParkHours</div>
         </div>
-        <div id="last-updated">Last updated: @Model.Rides.First().lastUpdate</div>
     </div>
-}
+    <div class="row">
+        <div class="col-12 text-center">
+            <div class="btn-group btn-group-toggle">
+                <label id="sort-az" class="btn btn-primary">
+                    <input type="radio" name="options" autocomplete="off"><i class="la la-sort-alpha-down"></i>
+                </label>
+                <label id="sort-location" class="btn btn-primary">
+                    <input type="radio" name="options" autocomplete="off"><i class="la la-map-marker"></i>
+                </label>
+                <label id="sort-time" class="btn btn-primary">
+                    <input type="radio" name="options" autocomplete="off"><i class="la la-clock"></i>
+                </label>
+                <button id="toggleClosed" type="button" class="btn btn-primary d-flex float-right" data-toggle="button"><i class="la la-ban"></i></button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    @if (Model != null) {
+        <div class="row">
+            <div style="width: 100%">
+                <ul>
+                    @foreach (var ride in Model.Rides) {
+                        var clr = (ride.active) ? "ride-active" : "ride-inactive";
+                        <li class="@clr">
+                            <div class="ride-container">
+                                @*<div class="ride-last-update-time">@ride.lastUpdate</div>*@
+                                <h3 class="ride-name">@ride.name</h3>
+                                <div class="ride-wait-time" style="border-color: @ride.color;color: @ride.color">@ride.waitTime</div>
+                                <div class="ride-location">@ride.location</div>
+                                @if (ride.active == false) {
+                                    <div class="ride-status">@ride.status</div>
+                                }
+                            </div>
+                        </li>
+                    }
+                </ul>
+            </div>
+            <div id="last-updated">Last updated: @Model.Rides.First().lastUpdate</div>
+        </div>
+    }
+</div>
 
 <script>
     $(document).ready(function () {
@@ -74,7 +80,7 @@
             } else {
                 tinysort('ul > li')
                 $(this).find('i.la').removeClass('la-sort-alpha-down-alt')
-                $(this).find('i.la').addClass('la-sort-alpha-down')                
+                $(this).find('i.la').addClass('la-sort-alpha-down')
             }
             sortedAsc = !sortedAsc
         })

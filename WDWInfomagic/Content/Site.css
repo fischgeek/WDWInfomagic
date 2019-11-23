@@ -1,9 +1,45 @@
 ﻿body {
-    padding-top: 10px;
+    /*padding-top: 10px;*/
     padding-bottom: 20px;
     background: #8E2DE2;
     background: -webkit-linear-gradient(to right, #4A00E0, #8E2DE2);
     background: linear-gradient(to right, #4A00E0, #8E2DE2);
+}
+
+#header-container {
+    height: 215px;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.mk_park {
+    background: url('/Images/magic_kingdom.jpg');
+}
+.ep_park {
+    background: url('/Images/epcot.jpg');
+}
+.hs_park {
+    background: url('/Images/hollywood_studios_park.jpg');
+}
+.ak_park {
+    background: url('/Images/animal_kingdom.jpg');
+}
+
+#header-controls-container {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    padding: 20px;
+}
+
+#overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 215px;
+    background: #0000004f;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -94,7 +130,7 @@ li {
     color: white;
 }
 
-#header, #header .col, #header .col img {
+#header-icons-container, #header-icons-container .col, #header-icons-container .col img {
     max-height: 100px;
 }
 

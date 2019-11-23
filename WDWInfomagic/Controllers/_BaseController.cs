@@ -63,6 +63,7 @@ namespace WDWInfomagic.Controllers
             WaitTimesViewModel waitTimesViewModel = new WaitTimesViewModel() {
                 Rides = outRides
                 , ParkName = park.ToString()
+                , ParkBackgroundClass = $"{parkInitials}_park"
                 , ParkHours = $"{time.openingTime.ToShortTimeString()} - {time.closingTime.ToShortTimeString()}"
                 , MKActive = park == Park.MagicKingdom ? "active-park" : ""
                 , AKActive = park == Park.AnimalKingdom ? "active-park" : ""

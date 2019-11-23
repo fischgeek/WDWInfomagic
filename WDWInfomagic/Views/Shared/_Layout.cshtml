@@ -6,6 +6,7 @@
     <title>@ViewBag.Title - WDWInfomagic</title>
     <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.1.0/css/line-awesome.min.css">
     <link href="https://fonts.googleapis.com/css?family=Aladin|Kalam&display=swap" rel="stylesheet">
+    <link href="~/Content/Site.css?v=47602b1e" rel="stylesheet" />
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-title" content="InfoMagic">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -19,9 +20,7 @@
     @Scripts.Render("~/bundles/tinysort")
 </head>
 <body>
-    <div class="container-fluid body-content">
-        @RenderBody()
-    </div>
+    @RenderBody()
     @RenderSection("scripts", required: false)
     <script>
         jQuery.event.special.touchstart = {
