@@ -64,7 +64,7 @@ namespace WDWInfomagic.Controllers
                 Rides = outRides
                 , ParkName = park.ToString()
                 , ParkBackgroundClass = $"{parkInitials}_park"
-                , ParkHours = $"{time.openingTime.ToShortTimeString()} - {time.closingTime.ToShortTimeString()}"
+                , ParkHours = $"{time.openingTime.AddHours(1).ToShortTimeString()} - {time.closingTime.AddHours(1).ToShortTimeString()}"
                 , MKActive = park == Park.MagicKingdom ? "active-park" : ""
                 , AKActive = park == Park.AnimalKingdom ? "active-park" : ""
                 , EPActive = park == Park.Epcot ? "active-park" : ""
