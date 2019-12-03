@@ -1,0 +1,11 @@
+﻿{
+  "name": "Infomagic",
+  "short_name": "Infomagic",
+  "orientation": "portrait",
+  "display": "standalone",
+  "start_url": "/mk/waittimes",
+  "scope": "/",
+  "color": "#ffffff",
+  "background_color": "#20c4f4",
+  "theme_color": "#20c4f4"
+}
